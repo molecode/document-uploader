@@ -18,7 +18,10 @@ app.secret_key = os.getenv('SECRET_KEY', secrets.token_hex(32))
 UPLOAD_FOLDER = os.getenv('UPLOAD_FOLDER', '/paperless-consume')
 ALLOWED_EXTENSIONS = set(os.getenv('ALLOWED_EXTENSIONS', 'pdf,png,jpg,jpeg,gif,tiff,txt,doc,docx').split(','))
 MAX_FILE_SIZE = int(os.getenv('MAX_FILE_SIZE', 50 * 1024 * 1024))  # Default 50MB
-PASSWORD_HASH = os.getenv('PASSWORD_HASH', generate_password_hash('changeme'))
+
+# Handle PASSWORD_HASH - convert $$ to $ if needed (Docker Compose escaping)
+password_hash_env = os.getenv('PASSWORD_HASH', generate_password_hash('changeme'))
+PASSWORD_HASH = password_hash_env.replace('$$', '$') if '$$' in password_hash_env else password_hash_env
 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['MAX_CONTENT_LENGTH'] = MAX_FILE_SIZE

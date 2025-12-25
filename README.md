@@ -2,6 +2,40 @@
 
 A simple, secure Flask web application for uploading documents to Paperless-ngx without exposing your Paperless instance to the internet.
 
+## Table of Contents
+
+- [Features](#features)
+- [Prerequisites](#prerequisites)
+- [Quick Start](#quick-start)
+  - [1. Clone or Download the Project](#1-clone-or-download-the-project)
+  - [2. Generate Configuration](#2-generate-configuration)
+  - [3. Configure Environment Variables](#3-configure-environment-variables)
+  - [4. Build and Run](#4-build-and-run)
+- [Deployment on Synology DiskStation](#deployment-on-synology-diskstation)
+  - [Option 1: Docker via SSH](#option-1-docker-via-ssh)
+  - [Option 2: Synology Docker GUI](#option-2-synology-docker-gui)
+  - [Setting up Reverse Proxy in Synology](#setting-up-reverse-proxy-in-synology)
+  - [SSL Certificate Setup](#ssl-certificate-setup)
+- [Configuration](#configuration)
+  - [Environment Variables](#environment-variables)
+  - [Rate Limiting](#rate-limiting)
+- [Security Features](#security-features)
+- [Usage](#usage)
+- [Monitoring](#monitoring)
+  - [Health Check](#health-check)
+  - [Logs](#logs)
+- [Troubleshooting](#troubleshooting)
+  - [Files not appearing in Paperless-ngx](#files-not-appearing-in-paperless-ngx)
+  - [Cannot login](#cannot-login)
+  - [Rate limiting too strict](#rate-limiting-too-strict)
+- [Updating](#updating)
+- [Backup](#backup)
+- [Security Recommendations](#security-recommendations)
+- [Uninstallation](#uninstallation)
+- [AI-Generated Code](#ai-generated-code)
+- [License](#license)
+- [Support](#support)
+
 ## Features
 
 - Simple drag-and-drop file upload interface
@@ -262,6 +296,15 @@ docker rmi document-uploader
 # Remove project directory
 rm -rf /volume1/docker/document-uploader
 ```
+
+## AI-Generated Code
+
+This project was developed with the assistance of [Claude Code](https://claude.com/claude-code), an AI-powered development tool by Anthropic. While the code was generated with AI assistance, it has been reviewed and tested to ensure:
+
+- **Security**: All security best practices are followed, including password hashing, rate limiting, and input validation
+- **Functionality**: The application has been tested for both direct execution and Docker deployment
+- **Code Quality**: The code follows Python and Flask best practices
+- **Documentation**: Comprehensive documentation and comments are provided
 
 ## License
 
