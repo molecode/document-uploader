@@ -102,9 +102,31 @@ MAX_FILE_SIZE=52428800
 
 ### 4. Build and Run
 
+**Option A: Build locally**
 ```bash
 docker-compose up -d
 ```
+
+**Option B: Use pre-built image from GitHub Container Registry**
+
+Update your `compose.yml` to use the pre-built image:
+```yaml
+services:
+  document-uploader:
+    image: ghcr.io/molecode/document-uploader:latest
+    # Remove the 'build: .' line
+```
+
+Then run:
+```bash
+docker compose up -d
+```
+
+Available tags:
+- `latest` - Latest release
+- `1.0.0` - Specific version
+- `1.0` - Major.minor version
+- `1` - Major version
 
 The application will be available at `http://localhost:5000`
 
