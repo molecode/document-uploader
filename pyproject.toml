@@ -1,7 +1,11 @@
 [project]
 name = "document-uploader"
-version = "1.0.0"
+version = "0.2.0"
 description = "Document uploader for Paperless-ngx"
+readme = "README.md"
+authors = [
+    { name = "Timo Schäpe", email = "info@timoschaepe.de" }
+]
 requires-python = ">=3.12"
 dependencies = [
     "flask==3.1.2",
