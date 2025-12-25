@@ -32,6 +32,7 @@ A simple, secure Flask web application for uploading documents to Paperless-ngx 
 - [Backup](#backup)
 - [Security Recommendations](#security-recommendations)
 - [Uninstallation](#uninstallation)
+- [AI-Generated Code](#ai-generated-code)
 - [License](#license)
 - [Support](#support)
 
@@ -295,6 +296,15 @@ docker rmi document-uploader
 # Remove project directory
 rm -rf /volume1/docker/document-uploader
 ```
+
+## AI-Generated Code
+
+This project was developed with the assistance of [Claude Code](https://claude.com/claude-code), an AI-powered development tool by Anthropic. While the code was generated with AI assistance, it has been reviewed and tested to ensure:
+
+- **Security**: All security best practices are followed, including password hashing, rate limiting, and input validation
+- **Functionality**: The application has been tested for both direct execution and Docker deployment
+- **Code Quality**: The code follows Python and Flask best practices
+- **Documentation**: Comprehensive documentation and comments are provided
 
 ## License
 
