@@ -38,3 +38,6 @@ htmlcov/
 
 # Data
 data/
+
+# Claude settings
+.claude/
