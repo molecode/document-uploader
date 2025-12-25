@@ -109,17 +109,17 @@ docker-compose up -d
 
 **Option B: Use pre-built image from GitHub Container Registry**
 
-Update your `compose.yml` to use the pre-built image:
+Use the pre-configured compose file:
+```bash
+docker compose -f compose.ghcr.yml up -d
+```
+
+Or update your `compose.yml` to use the pre-built image:
 ```yaml
 services:
   document-uploader:
     image: ghcr.io/molecode/document-uploader:latest
     # Remove the 'build: .' line
-```
-
-Then run:
-```bash
-docker compose up -d
 ```
 
 Available tags:
