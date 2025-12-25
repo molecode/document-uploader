@@ -100,35 +100,26 @@ MAX_FILE_SIZE=52428800
 
 **Important:** Adjust `PAPERLESS_CONSUME_DIR` to match your actual Paperless-ngx consume directory path.
 
-### 4. Build and Run
+### 4. Run with Docker Compose
 
-**Option A: Build locally**
+Start the application using the pre-built image from GitHub Container Registry:
+
 ```bash
-docker-compose up -d
+docker compose up -d
 ```
 
-**Option B: Use pre-built image from GitHub Container Registry**
+The application will be available at `http://localhost:5000`
 
-Use the pre-configured compose file:
-```bash
-docker compose -f compose.ghcr.yml up -d
-```
-
-Or update your `compose.yml` to use the pre-built image:
-```yaml
-services:
-  document-uploader:
-    image: ghcr.io/molecode/document-uploader:latest
-    # Remove the 'build: .' line
-```
-
-Available tags:
-- `latest` - Latest release
+**Available image tags:**
+- `latest` - Latest release (recommended)
 - `1.0.0` - Specific version
 - `1.0` - Major.minor version
 - `1` - Major version
 
-The application will be available at `http://localhost:5000`
+To use a specific version, update `compose.yml`:
+```yaml
+image: ghcr.io/molecode/document-uploader:1.0.0
+```
 
 ## Deployment on Synology DiskStation
 
@@ -145,20 +136,26 @@ The application will be available at `http://localhost:5000`
    cd /volume1/docker/document-uploader
    ```
 
-3. Copy all project files to this directory
-
-4. Create and configure the `.env` file as described above
-
-5. Build and run:
+3. Download the compose file and create `.env`:
    ```bash
-   docker-compose up -d
+   wget https://raw.githubusercontent.com/molecode/document-uploader/main/compose.yml
+   wget https://raw.githubusercontent.com/molecode/document-uploader/main/.env.example
+   cp .env.example .env
+   ```
+
+4. Configure the `.env` file as described above
+
+5. Run the application:
+   ```bash
+   docker compose up -d
    ```
 
 ### Option 2: Synology Docker GUI
 
 1. Open Docker package in DSM
-2. Go to Image tab and click "Add" → "Add from File"
-3. Build the image using the Dockerfile
+2. Go to Registry tab and search for `molecode/document-uploader`
+3. Download the image from GitHub Container Registry
+   - Or manually pull: `ghcr.io/molecode/document-uploader:latest`
 4. Create a container with these settings:
    - Port: 5000:5000
    - Volume: Mount your Paperless consume directory to `/paperless-consume`
@@ -279,15 +276,20 @@ limiter = Limiter(
 
 ## Updating
 
-To update the application:
+To update to the latest version:
 
 ```bash
-# Pull latest changes
-git pull
+# Pull the latest image
+docker compose pull
 
-# Rebuild and restart
-docker-compose down
-docker-compose up -d --build
+# Restart with new image
+docker compose down
+docker compose up -d
+```
+
+Or to update to a specific version, edit `compose.yml` and change the image tag:
+```yaml
+image: ghcr.io/molecode/document-uploader:1.1.0
 ```
 
 ## Backup
@@ -310,12 +312,12 @@ Important files to backup:
 
 ```bash
 # Stop and remove container
-docker-compose down
+docker compose down
 
 # Remove image
-docker rmi document-uploader
+docker rmi ghcr.io/molecode/document-uploader:latest
 
-# Remove project directory
+# Remove project directory (if applicable)
 rm -rf /volume1/docker/document-uploader
 ```
 

@@ -1,6 +1,6 @@
 services:
   document-uploader:
-    build: .
+    image: ghcr.io/molecode/document-uploader:latest
     container_name: document-uploader
     restart: unless-stopped
 
