@@ -112,13 +112,13 @@ The application will be available at `http://localhost:5000`
 
 **Available image tags:**
 - `latest` - Latest release (recommended)
-- `1.0.0` - Specific version
-- `1.0` - Major.minor version
-- `1` - Major version
+- `0.2.0` - Specific version
+- `0.2` - Major.minor version
+- `0` - Major version
 
 To use a specific version, update `compose.yml`:
 ```yaml
-image: ghcr.io/molecode/document-uploader:1.0.0
+image: ghcr.io/molecode/document-uploader:0.2.0
 ```
 
 ## Deployment on Synology DiskStation
