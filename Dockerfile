@@ -1,5 +1,8 @@
 FROM ghcr.io/astral-sh/uv:python3.12-bookworm-slim
 
+# Build argument for version
+ARG APP_VERSION=dev
+
 # Set working directory
 WORKDIR /app
 
@@ -27,6 +30,7 @@ EXPOSE 5000
 # Set environment variables
 ENV PYTHONUNBUFFERED=1
 ENV FLASK_APP=app.py
+ENV APP_VERSION=${APP_VERSION}
 
 # Health check
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \

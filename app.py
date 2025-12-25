@@ -1,5 +1,6 @@
 import os
 import secrets
+import tomllib
 from pathlib import Path
 from functools import wraps
 from flask import Flask, render_template, request, redirect, url_for, flash, session
@@ -10,6 +11,17 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from dotenv import load_dotenv
 
 load_dotenv()
+
+# Read version from pyproject.toml
+def get_version():
+    try:
+        with open('pyproject.toml', 'rb') as f:
+            data = tomllib.load(f)
+            return data.get('project', {}).get('version', 'unknown')
+    except Exception:
+        return os.getenv('APP_VERSION', 'unknown')
+
+VERSION = get_version()
 
 app = Flask(__name__)
 app.secret_key = os.getenv('SECRET_KEY', secrets.token_hex(32))
@@ -33,6 +45,11 @@ limiter = Limiter(
     default_limits=["200 per day", "50 per hour"],
     storage_uri="memory://"
 )
+
+# Make version available to all templates
+@app.context_processor
+def inject_version():
+    return {'version': VERSION}
 
 def allowed_file(filename):
     """Check if file extension is allowed"""
