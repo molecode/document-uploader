@@ -113,8 +113,17 @@ def upload_file():
                 # Create upload folder if it doesn't exist
                 Path(app.config['UPLOAD_FOLDER']).mkdir(parents=True, exist_ok=True)
 
-                # Save the file
+                # Make filename unique if it already exists
                 filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+                if os.path.exists(filepath):
+                    base, ext = os.path.splitext(filename)
+                    counter = 1
+                    while os.path.exists(filepath):
+                        filename = f"{base}_{counter}{ext}"
+                        filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+                        counter += 1
+
+                # Save the file
                 file.save(filepath)
                 uploaded_files.append(filename)
             else:
